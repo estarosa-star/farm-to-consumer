@@ -137,7 +137,8 @@ button {
 .page-hero,
 .auth-page,
 .cart-page,
-.checkout-page {
+.checkout-page,
+.confirmation-page {
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px 24px 64px;
@@ -170,7 +171,8 @@ button {
 }
 
 .hero-copy h1,
-.page-hero h1 {
+.page-hero h1,
+.confirmation-box h1 {
   margin: 0;
   font-size: clamp(2.8rem, 6vw, 5rem);
   line-height: 0.95;
@@ -178,7 +180,8 @@ button {
   max-width: 620px;
 }
 
-.hero-copy p {
+.hero-copy p,
+.confirmation-box p {
   max-width: 560px;
   font-size: 1.06rem;
   line-height: 1.7;
@@ -379,7 +382,9 @@ button {
 .farm-meta-row,
 .summary-line,
 .cart-summary-header,
-.mini-order-item {
+.mini-order-item,
+.confirmation-summary,
+.confirmation-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -616,7 +621,8 @@ button {
 .cart-items-panel,
 .shop-more-box,
 .checkout-form-panel,
-.checkout-side-panel {
+.checkout-side-panel,
+.confirmation-box {
   background: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(31, 57, 42, 0.08);
   border-radius: 20px;
@@ -986,6 +992,47 @@ td {
   color: #45604f;
 }
 
+.confirmation-box {
+  max-width: 780px;
+  margin: 60px auto 0;
+  padding: 36px;
+}
+
+.confirmation-box h1 {
+  max-width: 680px;
+  font-size: clamp(2.5rem, 4vw, 4rem);
+}
+
+.confirmation-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 26px 0 30px;
+  padding: 18px;
+  border-radius: 18px;
+  background: #f7fbf5;
+  border: 1px solid rgba(31, 57, 42, 0.08);
+}
+
+.confirmation-summary div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.confirmation-summary span {
+  color: #536a5a;
+}
+
+.confirmation-summary strong {
+  font-size: 1.08rem;
+}
+
+.confirmation-actions {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
 @media (max-width: 980px) {
   .hero-grid,
   .product-grid,
@@ -995,7 +1042,8 @@ td {
   .info-grid,
   .auth-card,
   .cart-layout,
-  .checkout-layout {
+  .checkout-layout,
+  .confirmation-summary {
     grid-template-columns: 1fr;
   }
 
@@ -1005,7 +1053,8 @@ td {
 
   .cta-panel,
   .site-footer,
-  .farm-heading-row {
+  .farm-heading-row,
+  .confirmation-actions {
     flex-direction: column;
     align-items: flex-start;
   }
