@@ -1,30 +1,54 @@
-export default function LoginPage() {
-  return (
-    <main className="content-page auth-page">
-      <section className="auth-card">
-        <div className="auth-copy">
-          <span className="eyebrow deep">Welcome back</span>
-          <h1>Sign in to your farm marketplace account.</h1>
-          <p>Manage your orders, connect with growers, and support local food communities.</p>
-        </div>
+import type { Metadata } from "next";
+import Link from "next/link";
+import "./globals.css";
 
-        <form className="auth-form">
-          <label>
-            Email address
-            <input type="email" placeholder="you@example.com" />
-          </label>
-          <label>
-            Password
-            <input type="password" placeholder="••••••••" />
-          </label>
-          <button type="submit" className="primary-button full-width">
-            Sign in
-          </button>
-          <button type="button" className="secondary-button full-width">
-            Continue with Google
-          </button>
-        </form>
-      </section>
-    </main>
+export const metadata: Metadata = {
+  title: "FarmCart | Fresh from local farms",
+  description: "A marketplace connecting farms directly to end users.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en">
+      <body>
+        <div className="app-shell">
+          <header className="site-header">
+            <div className="brand-wrap">
+              <div className="logo">F</div>
+              <Link href="/">FarmCart</Link>
+            </div>
+
+            <nav className="nav-links" aria-label="Main navigation">
+              <Link href="/products">Marketplace</Link>
+              <Link href="/farmers">Farmers</Link>
+              <Link href="/dashboard">Dashboard</Link>
+              <Link href="/login">Login</Link>
+            </nav>
+
+            <Link href="/login" className="primary-button small">
+              Join as a farmer
+            </Link>
+          </header>
+
+          {children}
+
+          <footer className="site-footer">
+            <div>
+              <strong>FarmCart</strong>
+              <p>Fresh food from nearby farms to your neighborhood.</p>
+            </div>
+            <div className="footer-links">
+              <Link href="/products">Products</Link>
+              <Link href="/farmers">Farmers</Link>
+              <Link href="/login">Sign in</Link>
+            </div>
+          </footer>
+        </div>
+      </body>
+    </html>
   );
 }

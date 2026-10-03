@@ -1,87 +1,44 @@
+"use client";
+
 import Link from "next/link";
-import { farms, products } from "@/lib/data";
+import { useMemo, useState } from "react";
+import { categories, products } from "@/lib/data";
 
-export default function HomePage() {
+export default function ProductsPage() {
+  const [activeCategory, setActiveCategory] = useState<(typeof categories)[number]>("All");
+
+  const visibleProducts = useMemo(() => {
+    if (activeCategory === "All") return products;
+    return products.filter((product) => product.category === activeCategory);
+  }, [activeCategory]);
+
   return (
-    <main className="page-shell">
-      <section className="hero-section">
-        <div className="hero-grid">
-          <div className="hero-copy">
-            <span className="eyebrow">Fresh food. Fair prices. Local trust.</span>
-            <h1>Connecting farms directly to the people who eat their food.</h1>
-            <p>
-              Discover local produce, support nearby growers, and get market-fresh groceries
-              delivered directly from farm to kitchen.
-            </p>
-            <div className="hero-actions">
-              <Link href="/products" className="primary-button">
-                Shop local produce
-              </Link>
-              <Link href="/dashboard" className="secondary-button">
-                Become a seller
-              </Link>
-            </div>
-            <div className="stats-row">
-              <div>
-                <strong>1,200+</strong>
-                <span>Local farms</span>
-              </div>
-              <div>
-                <strong>28k</strong>
-                <span>Happy households</span>
-              </div>
-              <div>
-                <strong>4.9/5</strong>
-                <span>Average rating</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="hero-card-panel">
-            <div className="mini-card large">
-              <div className="mini-header">
-                <span>Today’s harvest</span>
-                <span className="badge">Live</span>
-              </div>
-              <ul>
-                <li>
-                  <span>Tomatoes</span>
-                  <strong>18 crates</strong>
-                </li>
-                <li>
-                  <span>Peaches</span>
-                  <strong>9 crates</strong>
-                </li>
-                <li>
-                  <span>Herbs</span>
-                  <strong>24 bunches</strong>
-                </li>
-              </ul>
-            </div>
-            <div className="mini-card small">
-              <span className="avatar">SF</span>
-              <div>
-                <strong>Sunlit Fields</strong>
-                <p>Pickup in 2 hours</p>
-              </div>
-            </div>
-          </div>
+    <main className="content-page">
+      <section className="page-hero compact">
+        <div>
+          <span className="eyebrow deep">Marketplace</span>
+          <h1>Fresh produce from trusted local farms.</h1>
         </div>
       </section>
 
-      <section className="marketplace" id="marketplace">
-        <div className="section-heading">
-          <div>
-            <span className="eyebrow deep">Marketplace</span>
-            <h2>Fresh picks near you</h2>
-          </div>
-          <Link href="/products" className="secondary-button">
-            View all products
-          </Link>
+      <section className="filters-bar">
+        <div className="category-tabs">
+          {categories.map((category) => (
+            <button
+              key={category}
+              type="button"
+              className={activeCategory === category ? "tab active" : "tab"}
+              onClick={() => setActiveCategory(category)}
+            >
+              {category}
+            </button>
+          ))}
         </div>
+      </section>
 
-        <div className="product-grid">
-          {products.slice(0, 6).map((product) => (
+      <section className="section-wrap">
+        <div className="product-grid wide">
+          {visibleProducts.map((product) => (
             <article key={product.id} className="product-card">
               <div className="product-image" style={{ background: product.accent }}>
                 <span>{product.tag}</span>
@@ -96,7 +53,7 @@ export default function HomePage() {
                   <strong>{product.farm}</strong>
                   <span>{product.distance}</span>
                 </div>
-                <p>{product.location}</p>
+                <p>{product.description}</p>
                 <div className="product-footer">
                   <strong>${product.price}</strong>
                   <button type="button">Add to cart</button>
@@ -107,66 +64,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="farmers-section" id="farmers">
-        <div className="section-heading">
-          <div>
-            <span className="eyebrow deep">Featured farms</span>
-            <h2>Trusted producers in your area</h2>
-          </div>
-          <Link href="/farmers" className="secondary-button">
-            Explore farms
-          </Link>
-        </div>
-
-        <div className="farms-grid">
-          {farms.map((farm) => (
-            <div key={farm.name} className="farm-card">
-              <div className="farm-icon">🌾</div>
-              <h3>{farm.name}</h3>
-              <p>{farm.subtitle}</p>
-              <div className="farm-card-footer">
-                <span>{farm.metric}</span>
-                <strong>{farm.city}</strong>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="how-it-works" id="how-it-works">
-        <div className="section-heading center">
-          <div>
-            <span className="eyebrow deep">How it works</span>
-            <h2>Simple, transparent, and local</h2>
-          </div>
-        </div>
-
-        <div className="steps-grid">
-          <div className="step-box">
-            <span>01</span>
-            <h3>Browse farms</h3>
-            <p>Find fresh products from ethical local farms near you.</p>
-          </div>
-          <div className="step-box">
-            <span>02</span>
-            <h3>Pick your box</h3>
-            <p>Choose seasonal items, bundles, and delivery windows.</p>
-          </div>
-          <div className="step-box">
-            <span>03</span>
-            <h3>Track the harvest</h3>
-            <p>Receive updates from farmers and enjoy your groceries faster.</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-panel">
+      <section className="cta-panel small-panel">
         <div>
-          <span className="eyebrow deep">For farmers and buyers</span>
-          <h2>Bring better food to your community.</h2>
+          <span className="eyebrow deep">Support local</span>
+          <h2>Need a custom farm box?</h2>
         </div>
         <Link href="/login" className="primary-button">
-          Get started today
+          Build a basket
         </Link>
       </section>
     </main>

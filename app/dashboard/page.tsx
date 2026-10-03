@@ -1,38 +1,68 @@
-import Link from "next/link";
-import { farms } from "@/lib/data";
+import { dashboardStats, inventory, recentOrders } from "@/lib/data";
 
-export default function FarmersPage() {
+export default function DashboardPage() {
   return (
-    <main className="content-page">
+    <main className="content-page dashboard-page">
       <section className="page-hero compact">
         <div>
-          <span className="eyebrow deep">Our growers</span>
-          <h1>Meet the farms behind every fresh order.</h1>
+          <span className="eyebrow deep">Farmer dashboard</span>
+          <h1>Manage harvests, stock, and orders.</h1>
         </div>
       </section>
 
       <section className="section-wrap">
-        <div className="farm-listing">
-          {farms.map((farm) => (
-            <article key={farm.name} className="farm-detail-card">
-              <div className="farm-icon large">🌱</div>
-              <div className="farm-copy">
-                <div className="farm-heading-row">
-                  <h2>{farm.name}</h2>
-                  <span>{farm.city}</span>
-                </div>
-                <p className="farm-subtitle">{farm.subtitle}</p>
-                <p>{farm.description}</p>
-                <div className="farm-meta-row">
-                  <span>{farm.metric}</span>
-                  <span>{farm.reviews} reviews</span>
-                </div>
-                <Link href="/products" className="secondary-button small-inline">
-                  Shop this farm
-                </Link>
-              </div>
-            </article>
+        <div className="stat-grid">
+          {dashboardStats.map((stat) => (
+            <div key={stat.label} className="stat-card">
+              <span>{stat.label}</span>
+              <strong>{stat.value}</strong>
+            </div>
           ))}
+        </div>
+      </section>
+
+      <section className="info-grid">
+        <div className="panel-box">
+          <h3>Inventory overview</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {inventory.map((row) => (
+                <tr key={row.item}>
+                  <td>{row.item}</td>
+                  <td>{row.qty}</td>
+                  <td>
+                    <span className={row.status === "Low stock" ? "status low" : "status good"}>
+                      {row.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="panel-box">
+          <h3>Recent orders</h3>
+          <ul className="order-list">
+            {recentOrders.map((order) => (
+              <li key={order.id}>
+                <div>
+                  <strong>{order.customer}</strong>
+                  <span>
+                    {order.item} · {order.id}
+                  </span>
+                </div>
+                <em>{order.total}</em>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     </main>
