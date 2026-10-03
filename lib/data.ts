@@ -131,6 +131,14 @@ export const farms = [
     reviews: 96,
     description: "Animal welfare-first dairy and yogurt from local pasture herds.",
   },
+  {
+    name: "Meadow & Root",
+    subtitle: "Market garden",
+    metric: "Fresh harvest",
+    city: "Sacramento",
+    reviews: 77,
+    description: "Year-round greens and seasonal veggies from a community farm.",
+  },
 ];
 
 export const dashboardStats = [

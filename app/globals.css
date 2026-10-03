@@ -11,7 +11,8 @@ html, body {
 }
 
 button,
-input {
+input,
+select {
   font: inherit;
 }
 
@@ -73,7 +74,8 @@ button {
 .primary-button,
 .secondary-button,
 .tab,
-.product-footer button {
+.product-footer button,
+.quantity-control button {
   border: none;
   border-radius: 999px;
   transition: transform 0.2s ease, opacity 0.2s ease;
@@ -82,7 +84,8 @@ button {
 .primary-button:hover,
 .secondary-button:hover,
 .tab:hover,
-.product-footer button:hover {
+.product-footer button:hover,
+.quantity-control button:hover {
   transform: translateY(-1px);
 }
 
@@ -131,7 +134,8 @@ button {
 .how-it-works,
 .section-wrap,
 .page-hero,
-.auth-page {
+.auth-page,
+.cart-page {
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px 24px 64px;
@@ -310,7 +314,8 @@ button {
 .farms-grid,
 .steps-grid,
 .stat-grid,
-.info-grid {
+.info-grid,
+.shop-list-grid {
   display: grid;
   gap: 22px;
 }
@@ -319,8 +324,9 @@ button {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.product-grid.wide {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.product-grid.wide,
+.shop-list-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .product-card {
@@ -368,7 +374,9 @@ button {
 .farm-line,
 .product-footer,
 .farm-card-footer,
-.farm-meta-row {
+.farm-meta-row,
+.summary-line,
+.cart-summary-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -600,7 +608,10 @@ button {
 }
 
 .stat-card,
-.panel-box {
+.panel-box,
+.checkout-panel,
+.cart-items-panel,
+.shop-more-box {
   background: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(31, 57, 42, 0.08);
   border-radius: 20px;
@@ -626,7 +637,9 @@ button {
   margin-top: 22px;
 }
 
-.panel-box h3 {
+.panel-box h3,
+.checkout-panel h3,
+.shop-more-box h3 {
   margin: 0 0 16px;
   font-size: 1.4rem;
 }
@@ -744,7 +757,8 @@ td {
   color: #213d2c;
 }
 
-.auth-form input {
+.auth-form input,
+.filter-row select {
   border: 1px solid rgba(24, 54, 36, 0.12);
   border-radius: 14px;
   padding: 14px 16px;
@@ -771,6 +785,156 @@ td {
   gap: 18px;
 }
 
+.cart-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+  padding: 0 24px 40px;
+}
+
+.cart-summary-header {
+  margin-bottom: 20px;
+}
+
+.cart-summary-header h2 {
+  margin: 0;
+  font-size: 1.9rem;
+}
+
+.cart-item-row {
+  display: grid;
+  grid-template-columns: 76px 1.5fr 130px auto;
+  gap: 14px;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(31, 57, 42, 0.08);
+}
+
+.cart-item-preview {
+  width: 76px;
+  height: 76px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #edf9df, #dfeec1);
+  font-size: 2rem;
+}
+
+.cart-item-info h3 {
+  margin: 0 0 6px;
+  font-size: 1.2rem;
+}
+
+.cart-item-info p {
+  margin: 0;
+  color: #526555;
+}
+
+.quantity-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #f4f6ef;
+  border-radius: 999px;
+  padding: 6px 10px;
+}
+
+.quantity-control button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: white;
+  font-size: 1.2rem;
+}
+
+.cart-item-row strong {
+  font-size: 1.2rem;
+}
+
+.empty-state {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  padding: 22px;
+  color: #536a5a;
+}
+
+.shop-more-box {
+  margin-top: 24px;
+}
+
+.filter-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.mini-product-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f9f9f5;
+  border: 1px solid rgba(31, 57, 42, 0.08);
+  border-radius: 18px;
+  padding: 12px;
+}
+
+.mini-image {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #dfffe4, #e5d4a8);
+  font-size: 1.6rem;
+}
+
+.mini-product-card strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.mini-product-card p {
+  margin: 0;
+  color: #536a5a;
+}
+
+.checkout-panel {
+  height: fit-content;
+  position: sticky;
+  top: 96px;
+}
+
+.summary-line {
+  margin-bottom: 12px;
+  color: #45604f;
+}
+
+.total-line {
+  padding-top: 12px;
+  border-top: 1px solid rgba(31, 57, 42, 0.08);
+  margin-top: 18px;
+  font-size: 1.2rem;
+  color: #1d381f;
+}
+
+.checkout-btn {
+  margin-top: 20px;
+}
+
+.checkout-note {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #edf6ee;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #355b3d;
+}
+
 @media (max-width: 980px) {
   .hero-grid,
   .product-grid,
@@ -778,7 +942,8 @@ td {
   .steps-grid,
   .stat-grid,
   .info-grid,
-  .auth-card {
+  .auth-card,
+  .cart-layout {
     grid-template-columns: 1fr;
   }
 
@@ -796,6 +961,10 @@ td {
   .farm-detail-card {
     grid-template-columns: 1fr;
   }
+
+  .checkout-panel {
+    position: static;
+  }
 }
 
 @media (max-width: 640px) {
@@ -812,7 +981,8 @@ td {
   .section-wrap,
   .page-hero,
   .auth-page,
-  .filters-bar {
+  .filters-bar,
+  .cart-layout {
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -830,5 +1000,15 @@ td {
   .mini-card.small {
     width: 100%;
     margin-left: 0;
+  }
+
+  .filter-row,
+  .shop-list-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-item-row {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
   }
 }
